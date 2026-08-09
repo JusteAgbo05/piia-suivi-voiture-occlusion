@@ -1,3 +1,4 @@
+opencv-python-headless
 ultralytics>=8.4.0
 supervision
 gradio>=5.0
