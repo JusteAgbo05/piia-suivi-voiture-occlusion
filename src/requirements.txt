@@ -1,0 +1,7 @@
+ultralytics>=8.4.0
+supervision
+gradio>=5.0
+lap>=0.5.12
+opencv-python>=5.0.0.93
+spaces
+streamlit

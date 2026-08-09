@@ -1,0 +1,16 @@
+# Config ByteTrack adaptée à notre niche : voiture occluse longtemps par un
+# poids lourd. Seule différence avec le fichier par défaut d'Ultralytics :
+# track_buffer augmenté, pour garder une trace "en mémoire" plus longtemps
+# avant de l'abandonner.
+
+tracker_type: bytetrack
+track_high_thresh: 0.25
+track_low_thresh: 0.1
+new_track_thresh: 0.25
+
+# Augmenté par rapport au défaut (30) : un poids lourd peut cacher une
+# voiture plus longtemps qu'une occlusion "classique" entre deux voitures.
+track_buffer: 90
+
+match_thresh: 0.8
+fuse_score: True
