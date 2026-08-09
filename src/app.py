@@ -148,9 +148,9 @@ demo = gr.Interface(
         gr.Video(label="Vidéo annotée (détections + ID)"),
         gr.Markdown(label="Résumé du suivi"),
     ],
-    title="Suivi d'une voiture à travers une occlusion — Groupe 4",
+    title="Suivi d'une voiture à travers une occlusion - Groupe 4",
     description=(
-        "Projet Intégrateur 1 — AMA PIIA, Cohorte 2. Upload une vidéo de trafic : le système détecte "
+        "Projet Intégrateur 1 - AMA PIIA, Cohorte 2. Upload une vidéo de trafic : le système détecte "
         "les voitures et poids lourds, les suit avec la méthode choisie, et affiche le nombre "
         "d'identifiants uniques attribués (indicateur d'ID Switch)."
     ),
