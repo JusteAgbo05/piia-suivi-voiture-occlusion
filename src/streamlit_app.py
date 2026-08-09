@@ -5,11 +5,11 @@ import streamlit as st
 
 from app import ALL_METHODS, OUR_VERSION_LABEL, run_tracking
 
-st.set_page_config(page_title="Suivi d'une voiture à travers une occlusion — Groupe 4", layout="wide")
+st.set_page_config(page_title="Suivi d'une voiture à travers une occlusion - Groupe 4", layout="wide")
 
 st.title("Suivi d'une voiture à travers une occlusion — Groupe 4")
 st.markdown(
-    "Projet Intégrateur 1 — AMA PIIA, Cohorte 2. Upload une vidéo de trafic : le système détecte "
+    "Projet Intégrateur 1 - AMA PIIA, Cohorte 2. Upload une vidéo de trafic : le système détecte "
     "les voitures et poids lourds, les suit avec la méthode choisie, et affiche le nombre "
     "d'identifiants uniques attribués (indicateur d'ID Switch)."
 )
