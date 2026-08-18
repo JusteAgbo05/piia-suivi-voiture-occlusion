@@ -7,5 +7,3 @@ opencv-python>=5.0.0.93
 spaces
 streamlit
 imageio-ffmpeg
-libgl1
-libglib
