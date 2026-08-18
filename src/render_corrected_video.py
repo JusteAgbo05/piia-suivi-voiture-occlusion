@@ -7,6 +7,12 @@ from pathlib import Path
 import cv2
 from ultralytics import YOLO
 
+try:
+    import imageio_ffmpeg
+    FFMPEG_EXE = imageio_ffmpeg.get_ffmpeg_exe()  # binaire ffmpeg embarqué, aucune install système requise
+except ImportError:
+    FFMPEG_EXE = "ffmpeg"  # repli sur un ffmpeg système si le paquet n'est pas installé
+
 from reid_color_reconciliation import (
     CLASS_CAR,
     CLASS_TRUCK,
@@ -46,10 +52,16 @@ def draw_frame(frame_img, records_for_frame: list):
 
 
 def _ensure_browser_playable(video_path: Path) -> Path:
-    """Ré-encode la vidéo en H.264 + yuv420p pour qu'elle soit lisible dans un navigateur."""
+    """Ré-encode une vidéo en H.264/yuv420p (lisible par tous les navigateurs).
+
+    OpenCV (cv2.VideoWriter) produit des .mp4 valides mais souvent encodés en
+    mp4v — un codec que Chrome/Firefox ne savent pas lire dans une balise
+    <video>. On ré-encode donc systématiquement avec ffmpeg avant de renvoyer
+    le fichier à une interface web (Gradio, navigateur...).
+    """
     fixed_path = video_path.with_name(video_path.stem + "_web.mp4")
     cmd = [
-        "ffmpeg", "-y",
+        FFMPEG_EXE, "-y",
         "-i", str(video_path),
         "-c:v", "libx264", "-pix_fmt", "yuv420p",
         "-movflags", "+faststart",
