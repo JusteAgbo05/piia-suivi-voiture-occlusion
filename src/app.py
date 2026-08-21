@@ -1,6 +1,8 @@
 from collections import defaultdict
 from pathlib import Path
 
+BASE_DIR = Path(__file__).resolve().parent
+
 import gradio as gr
 from ultralytics import YOLO
 
@@ -25,7 +27,7 @@ MODEL_PATH = "yolov8m.pt"
 
 STANDARD_TRACKERS = {
     "ByteTrack (réglages par défaut)": "bytetrack.yaml",
-    "BoT-SORT + ReID générique": "botsort_reid.yaml",
+    "BoT-SORT + ReID générique": str(BASE_DIR / "botsort_reid.yaml"),
 }
 OUR_VERSION_LABEL = "Notre version (ByteTrack + réconciliation couleur/mouvement)"
 ALL_METHODS = list(STANDARD_TRACKERS.keys()) + [OUR_VERSION_LABEL]
@@ -97,7 +99,7 @@ def _run_our_version(video_path: str, conf: float):
     model = get_model()
     results = model.track(
         source=video_path,
-        tracker="bytetrack_custom.yaml",
+        tracker=str(BASE_DIR / "bytetrack_custom.yaml"),
         classes=[CLASS_CAR, CLASS_TRUCK],
         conf=conf,
         persist=True,
@@ -148,9 +150,9 @@ demo = gr.Interface(
         gr.Video(label="Vidéo annotée (détections + ID)"),
         gr.Markdown(label="Résumé du suivi"),
     ],
-    title="Suivi d'une voiture à travers une occlusion - Groupe 4",
+    title="Suivi d'une voiture à travers une occlusion — Groupe 4",
     description=(
-        "Projet Intégrateur 1 - AMA PIIA, Cohorte 2. Upload une vidéo de trafic : le système détecte "
+        "Projet Intégrateur 1 — AMA PIIA, Cohorte 2. Upload une vidéo de trafic : le système détecte "
         "les voitures et poids lourds, les suit avec la méthode choisie, et affiche le nombre "
         "d'identifiants uniques attribués (indicateur d'ID Switch)."
     ),
